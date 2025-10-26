@@ -19,7 +19,7 @@ pip install -r requirements.txt
 - ALSO MAKE SURE TO UPDATE THE REQUIREMENTS.TXT FILE WITH ANY NEW DEPENDENCIES THAT YOU ADD.
 
 ## Usage
-- Data: Contains the dataset used for the project (limited to 100 songs).
+- Data: Contains the dataset used for the project (limited to 30 songs).
 - Analysis: Contains three python scripts for generating various analysis plots.
 - More to be added.
 
@@ -28,7 +28,8 @@ pip install -r requirements.txt
 ASLP-SongEval/ 
 │ 
 ├── Data/ # Dataset directory (SongEval benchmark) 
-│ ├── mp3/ # Audio files (100 songs subset) 
+│ ├── mp3/ # Main Audio files Dataset 
+│ ├── mp3-subset/ # Subset of Audio files for testing (30 songs)
 │ ├── assets/ # Images and visual assets 
 │ ├── metadata.jsonl # Song metadata and annotations  
 │ └── README.md # Dataset documentation
@@ -38,7 +39,12 @@ ASLP-SongEval/
 │ ├── Spectograms.py # MFCC and spectrogram visualization 
 │ └── Waveforms.py # Waveform plotting 
 │ 
-├── plots/ # Generated visualization outputs 
+├── Plots/ # Generated visualization outputs 
+│ 
+├── Reports/ # Contains Course-Assignment Reports
+│
+├── Utils/
+│ └── DownloadDataset.py # A script to download the whole dataset
 │ 
 ├── requirements.txt  
 ├── README.md  
