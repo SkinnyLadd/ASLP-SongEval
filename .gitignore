@@ -1,4 +1,9 @@
-Data/mp3
+# Ignore all mp3 files in the dataset folder
+Data/mp3/*.mp3
+# Re-include the first 100 files only
+!Data/mp3/[0-9].mp3        # 0.mp3 – 9.mp3
+!Data/mp3/[1-9][0-9].mp3   # 10.mp3 – 99.mp3
+!Data/mp3/100.mp3          # include 100.mp3
 Data/.cache
 Data/.gitattributes
 Data/README.md
