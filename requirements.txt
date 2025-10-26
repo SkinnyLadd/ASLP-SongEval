@@ -1,1 +1,4 @@
 huggingface_hub
+matplotlib
+librosa
+numpy
