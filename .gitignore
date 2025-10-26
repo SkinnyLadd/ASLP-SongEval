@@ -1,0 +1,6 @@
+Data/mp3
+Data/.cache
+Data/.gitattributes
+Data/README.md
+.idea
+zownload.py
