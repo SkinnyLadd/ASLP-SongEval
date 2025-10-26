@@ -17,4 +17,4 @@ plt.xlabel('Duration (seconds)')
 plt.ylabel('Count')
 plt.tight_layout()
 
-plt.savefig('plots/duration_hist_all.pdf')
+plt.savefig('Plots/duration_hist_all.pdf')

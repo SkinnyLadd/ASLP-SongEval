@@ -11,4 +11,4 @@ plt.title('Spectrogram (dB)')
 plt.colorbar(format='%+2.0f dB')
 plt.tight_layout()
 
-plt.savefig('plots/mfcc_21_dB.pdf')
+plt.savefig('Plots/mfcc_21_dB.pdf')
