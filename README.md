@@ -1,81 +1,92 @@
-# ASLP - SongEval (DEV)
-## The following instructions are for the development version of the project. 
+# ASLP - SongEval 
 
----
+## Automatic Song Aesthetics Evaluation — ICASSP 2026 Challenge (Track 2)
+
+This repository contains the development code for our semester project on **Automatic Song Aesthetics Evaluation**, aligned with the **ICASSP 2026 Grand Challenge (Track 2)**.
 
 ## Installation
-I recommend using a virtual environment to install and manage the dependencies. Personally, I use [Anaconda](https://www.anaconda.com/products/individual).
-A small guide for it is included below:
 
-- After installing conda, open up the terminal in the project root and run the following commands
-```bash
-conda env create [env-name]
-conda activate [env-name]
+### 1. Setup Environment
+
+It is recommended to use a virtual environment. (We use **Anaconda**.)
+
+```
+conda env create -n songeval python=3.9
+conda activate songeval
+```
+
+### 2. Install Dependencies
+
+```
 pip install -r requirements.txt
 ```
-(you can choose any name for the environment)
 
-- Alternatively, you can use the default python venv or any other venv for that matter - just make sure to run the last pip install command after activating the venv.
-- ALSO MAKE SURE TO UPDATE THE REQUIREMENTS.TXT FILE WITH ANY NEW DEPENDENCIES THAT YOU ADD.
-
-## Usage
-- Data: Contains the dataset used for the project (limited to 30 songs).
-- Analysis: Contains three python scripts for generating various analysis plots.
-- More to be added.
+**Note:** Ensure you have **ffmpeg** installed on your system for audio processing.
 
 ## Project Structure
-``` 
-ASLP-SongEval/ 
-│ 
-├── Data/ # Dataset directory (SongEval benchmark) 
-│ ├── mp3/ # Main Audio files Dataset 
-│ ├── mp3-subset/ # Subset of Audio files for testing (30 songs)
-│ ├── assets/ # Images and visual assets 
-│ ├── metadata.jsonl # Song metadata and annotations  
-│ └── README.md # Dataset documentation
-│ 
-├── Analysis/ # Exploratory Data Analysis scripts 
-│ ├── AudioDuration.py # Duration distribution analysis 
-│ ├── Spectograms.py # MFCC and spectrogram visualization 
-│ └── Waveforms.py # Waveform plotting 
-│ 
-├── Plots/ # Generated visualization outputs 
-│ 
-├── Reports/ # Contains Course-Assignment Reports
+
+
+```
+ASLP-SongEval/
+│
+├── Data/                     
+│   ├── mp3/                  # (Not included) Main Audio files
+│   ├── mp3-subset/           # Subset for quick testing
+│   └── README.md             
+│
+├── Analysis/                 
+│   ├── AudioDuration.py      
+│   ├── Spectograms.py        
+│   └── Waveforms.py          
+│
+├── Baselines/                
+│   ├── Baseline_1.ipynb      # Random Forest + Librosa features
+│   ├── Baseline_2.ipynb    # Wav2Vec2 (Speech-domain)
+│   └── Baseline_3.ipynb     # AST (Audio-domain)
+│
+├── Proposed_Solution/        
+│   ├── AST_Model.ipynb      # Final scalable pipeline + MERT training
+│   └── generate_plots.py        
+│
+├── Reports/                  
+│   ├── Assignment-1.pdf
+│   ├── Assignment-2.pdf
+│   └── Assignment-3.pdf
 │
 ├── Utils/
-│ └── DownloadDataset.py # A script to download the whole dataset
-│ 
-├── requirements.txt  
-├── README.md  
-└── .gitignore 
+│   └── DownloadDataset.py    
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
-## Progress
-### Assignment-1 (Analysis)
-- [x] Waveforms
-- [x] Spectograms (MFCCs)
-- [x] Audio Durations
-- [x] Report (EDA Summary + Plots)
+## Key Features & Progress
 
-### Assignment-2 (Pipelines)
-- [ ] Data Loader & Preprocessing
-- [ ] Baseline 1: CNN + MFCC Features
-- [ ] Baseline 2: LSTM + Spectrograms
-- [ ] Baseline 3: Wav2Vec2 / Whisper
-- [ ] Training & Evaluation Pipeline
-- [ ] Results & Comparison Tables
-- [ ] Report (Pipeline & Results)
+### Assignment 1: Problem Understanding (Completed)
 
-### Assignment-3 (Proposed Solution)
-- [ ] Model Design (Improved Architecture / Augmentation)
-- [ ] Experiment Setup & Hyperparameter Tuning
-- [ ] Loss / Accuracy Curve Plots
-- [ ] Confusion Matrix & Error Analysis
-- [ ] Discussion, Limitations, Future Work
-- [ ] Final ICASSP-style Report (Merged & Formatted)
+- [x] Exploratory Data Analysis (Waveforms, Spectrograms)  
+- [x] Dataset Statistics (Duration, Metadata)  
+- [x] Initial Report  
 
+### Assignment 2: Baseline Pipelines (Completed)
 
+We implemented and compared three baseline models on a memory-constrained subset:
 
+- [x] Baseline 1: Random Forest + hand-crafted features (MFCCs, Chroma, Contrast)  
+- [x] Baseline 2: Wav2Vec2 (Speech-Pretrained) + regression head  
+- [x] Baseline 3: Audio Spectrogram Transformer (AST) (Audio-Pretrained)  
+- [x] Key Finding: Audio-domain pre-training (AST) significantly outperforms speech-domain pre-training (Wav2Vec2)
 
+### Assignment 3: Proposed Solution (Completed)
 
+We solved memory limitations and built a full scalable system:
+
+- [x] Scalable Pipeline: Out-of-core processing that streams data, chunks audio on-the-fly, and serializes to JSONL — enabling full dataset training without RAM crashes.
+- [x] Proposed Model: Implemented MERT (Music-Pretrained) and compared it against AST.
+- [x] Result: AST achieved the highest performance (SRCC 0.837).
+
+## Acknowledgments
+
+- Dataset provided by ASLP-Lab for the ICASSP 2026 Challenge.  
+- Models used: MIT/ast-finetuned-audioset-10-10-0.4593, facebook/wav2vec2-base, m-a-p/MERT-v1-95M.
